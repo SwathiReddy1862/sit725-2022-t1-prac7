@@ -5,11 +5,18 @@ var cors = require("cors");
 const MongoClient = require("mongodb").MongoClient;
 let projectCollection;
 
+require('dotenv').config()
+let dbConnect = require("./dbConnect");
+let projectRoutes = require("./routes/projectRoute");
+let userRoute = require("./routes/userRoute");
+let http = require('http').createServer(app);
+let io = require('socket.io')(http);
 
 app.use(express.static(__dirname + '/public'))
 app.use(express.json())
 app.use(express.urlencoded({extended : false}));
 app.use(cors());
+
 
 const uri = "mongodb+srv://admin:0AaXpfFB4ZmEFair@sit725prac.jlfk6.mongodb.net/SIT725_2022_t1?retryWrites=true&w=majority"
 const client = new MongoClient(uri, { useNewUrlParser: true });
